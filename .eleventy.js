@@ -1,6 +1,7 @@
 const path = require("path");
 const fs = require("fs");
 const navigationPlugin = require("@11ty/eleventy-navigation");
+const markdownIt = require("markdown-it");
 
 // Normalize an Eleventy inputPath to always look like "content/x/y.md",
 function normalizePath(p) {
@@ -95,6 +96,29 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addFilter("findNavIndex", function (siblings, key) {
     return siblings.findIndex(s => s.key === key);
   });
+  const md = markdownIt({ html: true });
+
+  // katex \, fix
+  function mathPlugin(md) {
+    function protectMath(state, silent) {
+      const start = state.pos;
+      if (state.src[start] !== "$") return false;
+      const isDisplay = state.src[start + 1] === "$";
+      const marker = isDisplay ? "$$" : "$";
+      const end = state.src.indexOf(marker, start + marker.length);
+      if (end === -1) return false;
+      if (!silent) {
+        const token = state.push("text", "", 0);
+        token.content = state.src.slice(start, end + marker.length);
+      }
+      state.pos = end + marker.length;
+      return true;
+    }
+    md.inline.ruler.before("escape", "math", protectMath);
+  }
+
+  md.use(mathPlugin);
+  eleventyConfig.setLibrary("md", md);
 
   return {
     dir: {
