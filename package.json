@@ -1,0 +1,17 @@
+{
+  "name": "personal-notes-site",
+  "version": "1.0.0",
+  "description": "Personal blog/notes site built with 11ty",
+  "scripts": {
+    "build": "eleventy",
+    "serve": "eleventy --serve",
+    "debug": "DEBUG=* eleventy"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^2.0.1",
+    "gray-matter": "^4.0.3"
+  },
+  "dependencies": {
+    "@11ty/eleventy-navigation": "^1.0.5"
+  }
+}

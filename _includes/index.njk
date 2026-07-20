@@ -1,0 +1,50 @@
+{% extends "base.njk" %}
+{% block content %}
+  <article class="genre-index">
+    <header class="genre-header">
+      <h1>{{ title }}</h1>
+      {% if description %}<p class="genre-description">{{ description }}</p>{% endif %}
+    </header>
+    {% if content %}<div class="genre-intro">{{ content | safe }}</div>{% endif %}
+    {% set children = collections.all | eleventyNavigation(eleventyNavigation.key) %}
+    {% if children.length > 0 %}
+      {% if type == "series" %}
+        {# SERIES: card grid with optional image #}
+        <section class="lessons-grid">
+          {% for child in children %}
+            <a href="{{ child.url }}" class="lesson-card">
+              {% if child.data.image %}
+              <!-- TODO: move styling to css file -->
+                <div class="lesson-card-bg" style="background-image: url('{{ child.data.image }}')"></div>
+              {% else %}
+                <div class="lesson-card-bg" style="background: linear-gradient(135deg, #1a1a1a 0%, #252525 100%)"></div>
+              {% endif %}
+              <div class="lesson-card-gradient"></div>
+              <div class="lesson-card-content">
+                <span class="lesson-card-number">Part {{ loop.index }}</span>
+                <span class="lesson-card-title">{{ child.title }}</span>
+                {% if child.data.date %}<span class="lesson-card-meta">{{ child.data.date | formatDate }}</span>{% endif %}
+              </div>
+            </a>
+          {% endfor %}
+        </section>
+      {% else %}
+        {# plain list #}
+        <section class="posts-list-plain">
+          <ul>
+            {% for child in children %}
+              <li class="posts-list-item">
+                <a href="{{ child.url }}">
+                  {{ child.title }}
+                  {% if child.data.date %}<time datetime="{{ child.data.date | htmlDateString }}">{{ child.data.date | formatDate }}</time>{% endif %}
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+        </section>
+      {% endif %}
+    {% else %}
+      <p class="empty-notice">No content (yet)</p>
+    {% endif %}
+  </article>
+{% endblock %}

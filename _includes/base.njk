@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% if title %}{{ title }} | {% endif %}Blog</title>
+  
+  <link rel="stylesheet" href="/css/main.css">
+
+  {% for cssFile in cssFiles %}
+  <link rel="stylesheet" href="{{ cssFile }}">
+  {% endfor %}
+
+  {% if customCss %}
+  <link rel="stylesheet" href="{{ customCss }}">
+  {% endif %}
+
+  {% if customJs %}
+  <script src="{{ customJs }}" defer></script>
+  {% endif %}
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body, { delimiters: [ {left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false} ] });"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-c.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-cpp.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-glsl.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-python.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-javascript.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-sql.min.js"></script>
+</head>
+
+<body{% if customClass %} class="{{ customClass }}"{% endif %}>
+  <div class="container">
+	  <!-- <header>
+		<nav class="site-nav">
+		  <a href="/" class="site-title">Blog</a>
+		  <ul class="nav-genres">
+			{% for genre in genres %}
+			<li><a href="{{ genre.url }}">{{ genre.title }}</a></li>
+			{% endfor %}
+		  </ul>
+		</nav>
+	  </header> -->
+
+	  {% set crumbs = collections.all | eleventyNavigationBreadcrumb(eleventyNavigation.key) %}
+	  <nav class="breadcrumbs" aria-label="Breadcrumb">
+		<ol>
+		  {% for crumb in crumbs %}
+		  <li><a href="{{ crumb.url }}">{{ crumb.title }}</a></li>
+		  {% endfor %}
+		  <li aria-current="page"><a href="#">{{ title }}</a></li>
+		</ol>
+	  </nav>
+	  
+	  <main>
+		{% block content %}
+		{% endblock %}
+	  </main>
+  </div>
+</body>
+
+</html>

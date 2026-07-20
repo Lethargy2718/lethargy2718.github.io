@@ -1,0 +1,31 @@
+{% extends "base.njk" %}
+{% block content %}
+<section class="hero">
+  <h1>Welcome</h1>
+  <p class="bio">Blog under construction. Will be adding personal notes on random CS topics in the future (mainly gamedev and graphics).</p>
+</section>
+
+<section class="recent-posts">
+  <h2>Recent Posts</h2>
+  {% if collections.allPosts.length > 0 %}
+  <ul class="post-feed">
+    {% for post in collections.allPosts | limit(3) %}
+    <li class="post-feed-item">
+      <a href="{{ post.url }}" class="post-feed-link">
+        <h3>{{ post.data.title or (post.inputPath | titleFromPath) }}</h3>
+        {% if post.data.date %}<time datetime="{{ post.data.date | htmlDateString }}">{{ post.data.date | formatDate }}</time>{% endif %}
+        {% if post.data.description %}<p>{{ post.data.description }}</p>{% endif %}
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
+  {% else %}<p>No posts yet. Start writing!</p>{% endif %}
+</section>
+
+<section class="genres-overview">
+  <h2>Topics</h2>
+  <ul>
+    {% for genre in genres %}<li><a href="{{ genre.url }}">{{ genre.title }}</a></li>{% endfor %}
+  </ul>
+</section>
+{% endblock %}
