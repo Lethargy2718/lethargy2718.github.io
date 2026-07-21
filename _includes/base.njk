@@ -35,36 +35,38 @@
 </head>
 
 <body{% if customClass %} class="{{ customClass }}"{% endif %}>
-  <div class="container">
-	  <!-- <header>
-		<nav class="site-nav">
-		  <a href="/" class="site-title">Blog</a>
-		  <ul class="nav-genres">
-			{% for genre in genres %}
-			<li><a href="{{ genre.url }}">{{ genre.title }}</a></li>
-			{% endfor %}
-		  </ul>
-		</nav>
-	  </header> -->
-
-	  {% set crumbs = collections.all | eleventyNavigationBreadcrumb(eleventyNavigation.key) %}
-	  <nav class="breadcrumbs" aria-label="Breadcrumb">
-		<ol>
-		  {% for crumb in crumbs %}
-		  <li><a href="{{ crumb.url }}">{{ crumb.title }}</a></li>
-		  {% endfor %}
-		  <li aria-current="page"><a href="#">{{ title }}</a></li>
-		</ol>
-	  </nav>
-	  
-	  <main>
-		{% block content %}
-		{% endblock %}
-	  </main>
-
-    <footer>
-      <p>&copy; {{ currentYear }} <a href="https://github.com/Lethargy2718" target="_blank">Lethargy2718</a>. All rights reserved.</p>
-    </footer>
+  <div class="animation-clip">
+    <div class="container">
+      <!-- <header>
+      <nav class="site-nav">
+        <a href="/" class="site-title">Blog</a>
+        <ul class="nav-genres">
+        {% for genre in genres %}
+        <li><a href="{{ genre.url }}">{{ genre.title }}</a></li>
+        {% endfor %}
+        </ul>
+      </nav>
+      </header> -->
+  
+      {% set crumbs = collections.all | eleventyNavigationBreadcrumb(eleventyNavigation.key) %}
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <ol>
+        {% for crumb in crumbs %}
+        <li><a href="{{ crumb.url }}">{{ crumb.title }}</a></li>
+        {% endfor %}
+        <li aria-current="page"><a href="#">{{ title }}</a></li>
+      </ol>
+      </nav>
+      
+      <main>
+      {% block content %}
+      {% endblock %}
+      </main>
+  
+      <footer>
+        <p>&copy; {{ currentYear }} <a href="https://github.com/Lethargy2718" target="_blank">Lethargy2718</a>. All rights reserved.</p>
+      </footer>
+    </div>
   </div>
 </body>
 
