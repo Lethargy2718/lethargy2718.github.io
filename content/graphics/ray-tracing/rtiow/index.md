@@ -1,7 +1,7 @@
 ---
 layout: index.njk
 title: Ray Tracing in One Weekend
-description: 'Notes on the "Ray Tracing in One Weekend" series. Mostly maths derivations'
+description: 'Notes on the "Ray Tracing in One Weekend" series. Mostly maths derivations the books skipped.'
 type: series
 eleventyNavigation:
   key: rtiow
