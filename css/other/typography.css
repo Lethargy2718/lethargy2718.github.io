@@ -73,13 +73,13 @@ a {
     color: var(--accent);
     text-decoration: none;
     transition: color var(--transition-fast), opacity var(--transition-fast);
+    text-underline-offset: 3px;
 }
 
 a:hover {
     color: var(--accent);
     opacity: 0.8;
     text-decoration: underline;
-    text-underline-offset: 2px;
 }
 
 /* Blockquotes */

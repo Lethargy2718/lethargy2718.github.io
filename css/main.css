@@ -37,8 +37,8 @@ body {
     background: var(--bg);
     color: var(--fg);
     min-height: 100vh;
-    /* display: flex; */
-    /* flex-direction: column; */
+    display: flex;
+    flex-direction: column;
 }
 
 /* Layout */
@@ -47,6 +47,9 @@ body {
     width: 100%;
     max-width: var(--content-width);
     margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 main {
@@ -587,16 +590,20 @@ p:has(.katex-display) {
 /* Footer */
 footer {
     margin-top: auto;
-    padding: calc(var(--gap) * 0.8) 0;
+    display: grid;
+    place-content: center;
+    padding: 2em 0;
     border-top: 1px solid var(--border);
-    text-align: center;
     font-size: 0.85rem;
-    color: var(--fg-muted);
-}
 
+    & > p {
+        color: var(--fg-muted) !important;
+        margin: 0;
+    }
+}
 footer a {
     color: var(--fg-muted);
-    text-decoration: none;
+    text-decoration: underline;
 }
 
 footer a:hover {

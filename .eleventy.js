@@ -120,6 +120,8 @@ module.exports = function (eleventyConfig) {
   md.use(mathPlugin);
   eleventyConfig.setLibrary("md", md);
 
+  eleventyConfig.addGlobalData("currentYear", new Date().getFullYear());
+
   return {
     dir: {
       input: "content",
